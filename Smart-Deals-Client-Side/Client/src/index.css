@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Custom gradient button */
+.btn-primary {
+  @apply bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white border-none;
+}
+
+.btn-primary:hover {
+  @apply opacity-90;
+}
