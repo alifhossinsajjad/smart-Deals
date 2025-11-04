@@ -10,16 +10,19 @@ const ProductsDetails = () => {
   const { user } = use(AuthContext);
 
   const [bids, setBids] = useState([]);
-  
 
   useEffect(() => {
-    fetch(`http://localhost:3000/products/Bids/${productId}`)
+    fetch(`http://localhost:3000/products/Bids/${productId}`,{
+      headers: {
+        authorization : `Bearer ${user.accessToken}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log("bids for this product", data);
         setBids(data);
       });
-  }, [productId]);
+  }, [productId,user]);
 
   const handleBidModalOpen = () => {
     bidModalRef.current.showModal();
@@ -62,13 +65,12 @@ const ProductsDetails = () => {
             timer: 1500,
           });
 
-          // add the new bid to the state  
+          // add the new bid to the state
           newBid._id = data.insertedId;
-          const newBids = [...bids,newBid];
-          newBids.sort((a,b) => b.bid_price - a.bid_price)
-          setBids(newBids)
+          const newBids = [...bids, newBid];
+          newBids.sort((a, b) => b.bid_price - a.bid_price);
+          setBids(newBids);
         }
-       
       });
   };
 
@@ -153,7 +155,7 @@ const ProductsDetails = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {bids.map((bid,index) => (
+              {bids.map((bid, index) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
                   <td>
@@ -173,7 +175,7 @@ const ProductsDetails = () => {
                     </div>
                   </td>
                   <td>
-                   <p>{bid.buyer_email}</p>
+                    <p>{bid.buyer_email}</p>
                   </td>
                   <td>{bid.bid_price}</td>
                   <th>

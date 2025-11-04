@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const setProfile = (updateData) => {
-    return updateProfile (auth.currentUser, updateData);
+    return updateProfile(auth.currentUser, updateData);
   };
 
   const signOutUser = () => {
@@ -44,6 +44,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (createUser) => {
       setUser(createUser);
+      if (createUser) {
+        const loggedUser = { email: createUser.email };
+        fetch("http://localhost:3000/getToken", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("after gatting the token", data);
+            localStorage.setItem("access-token", data.token);
+          });
+      }
       setLoadin(false);
     });
 
@@ -61,7 +76,7 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoadin,
     setProfile,
-    setUser
+    setUser,
   };
 
   return (

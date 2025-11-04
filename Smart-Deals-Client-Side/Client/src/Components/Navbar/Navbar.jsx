@@ -7,8 +7,8 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     signOutUser()
-      .then((result) => {
-        console.log(result);
+      .then((res) => {
+        console.log(res);
       })
       .catch((error) => {
         console.log(error);
