@@ -25,8 +25,6 @@ const logger = (req, res, next) => {
   next();
 };
 
-
-
 // smartDB
 // 6tAS3hfVKTU2rF1c
 
@@ -46,10 +44,6 @@ app.get("/", (req, res) => {
   res.send("Smart server is running");
 });
 
-
-
-
-
 const verifyFireBaseToken = async (req, res, next) => {
   console.log("in the veryfi middleware ", req.headers.authorization);
   const authorization = req.headers.authorization;
@@ -63,7 +57,7 @@ const verifyFireBaseToken = async (req, res, next) => {
 
   try {
     const tokenInfo = await admin.auth().verifyIdToken(token);
-    req.token_emial = tokenInfo.email;
+    req.token_email = tokenInfo.email;
     // console.log("after user validation", tokenInfo);
     next();
   } catch {
@@ -72,9 +66,6 @@ const verifyFireBaseToken = async (req, res, next) => {
 
   // verify toekn
 };
-
-
-
 
 async function run() {
   try {
@@ -87,12 +78,12 @@ async function run() {
 
     // jwt related apis
 
-    app.post('/getToken', (req, res) => {
-      const loggedUser = req.body 
+    app.post("/getToken", (req, res) => {
+      const loggedUser = req.body;
       const token = jwt.sign(loggedUser, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
-      res.send({token});
+      res.send({ token });
     });
 
     //Users API
