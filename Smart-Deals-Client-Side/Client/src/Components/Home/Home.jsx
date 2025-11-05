@@ -5,6 +5,8 @@ import Loading from '../Loading/Loading';
 
 const latestProductsPromise = fetch('http://localhost:3000/latest/products').then(res=> res.json())
 
+
+
 const Home = () => {
     return (
         <div>

@@ -144,7 +144,10 @@ const Register = () => {
           <div className="flex-1 h-px bg-gray-300"></div>
         </div>
 
-        <button onClick={handlegoogleSignIn} className="w-full py-3 border border-gray-300 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-all">
+        <button
+          onClick={handlegoogleSignIn}
+          className="w-full py-3 border border-gray-300 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
+        >
           <img
             src="https://www.svgrepo.com/show/355037/google.svg"
             alt="Google"
